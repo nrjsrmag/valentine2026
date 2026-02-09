@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import photo9 from '../assets/9.jpg';
-import photo10 from '../assets/10.jpg';
-import photo11 from '../assets/11.jpg';
-import photo12 from '../assets/12.jpg';
-import photo13 from '../assets/13.jpg';
-import photo14 from '../assets/14.jpg';
+import photo9 from '../assets/9.jpeg';
+import photo10 from '../assets/10.jpeg';
+import photo11 from '../assets/11.jpeg';
+import photo12 from '../assets/12.jpeg';
+import photo13 from '../assets/13.jpeg';
+import photo14 from '../assets/14.jpeg';
 import './YesPage.css';
 
 function YesPage() {
