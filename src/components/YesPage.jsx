@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import photo9 from '../assets/9.jpg';
+import photo10 from '../assets/10.jpg';
+import photo11 from '../assets/11.jpg';
+import photo12 from '../assets/12.jpg';
+import photo13 from '../assets/13.jpg';
+import photo14 from '../assets/14.jpg';
 import './YesPage.css';
 
 function YesPage() {
@@ -10,18 +16,25 @@ function YesPage() {
     setCurrentDate(new Date());
   }, []);
 
+  const photosMap = {
+    9: photo9,
+    10: photo10,
+    11: photo11,
+    12: photo12,
+    13: photo13,
+    14: photo14,
+  };
+
   const getPhotoForToday = () => {
     const date = currentDate.getDate();
     const month = currentDate.getMonth() + 1;
-    
-    // For February 9-14, use the date as photo name
     if (month === 2 && date >= 9 && date <= 14) {
-      return `${date}.jpeg`;
+      return photosMap[date] || null;
     }
     return null;
   };
 
-  const photoName = getPhotoForToday();
+  const photo = getPhotoForToday();
 
   return (
     <div className="yes-container">
@@ -54,24 +67,21 @@ function YesPage() {
         <div className="photo-section">
           <h2 className="photo-title">Two gareeb in love 💕</h2>
           <div className="photo-frame">
-            {photoName ? (
-              <img 
-                src={`/src/assets/${photoName}`} 
-                alt="Our Special Memory" 
+            {photo ? (
+              <img
+                src={photo}
+                alt="Our Special Memory"
                 className="couple-photo"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
-                }}
               />
-            ) : null}
-            <div className="photo-placeholder" style={{ display: photoName ? 'none' : 'flex' }}>
-              <p className="photo-note">
-                📸 Add today's photo in:<br />
-                <code>src/assets/{photoName || '9.jpeg, 10.jpeg, etc.'}</code>
-              </p>
-              <p className="heart-emoji">❤️</p>
-            </div>
+            ) : (
+              <div className="photo-placeholder" style={{ display: 'flex' }}>
+                <p className="photo-note">
+                  📸 Add today's photo in:<br />
+                  <code>src/assets/9.jpg</code> through <code>src/assets/14.jpg</code>
+                </p>
+                <p className="heart-emoji">❤️</p>
+              </div>
+            )}
           </div>
         </div>
 
