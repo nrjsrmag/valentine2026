@@ -98,14 +98,15 @@ function HomePage() {
       const randomTop = Math.floor(Math.random() * 60) + 10; // 10-70%
       const randomLeft = Math.floor(Math.random() * 60) + 10; // 10-70%
       setButtonPosition({ top: `${randomTop}%`, left: `${randomLeft}%` });
-      setHoverCount(hoverCount + 1);
+      setHoverCount(prev => prev + 1);
     } else {
       setNoButtonBroken(true);
     }
   };
 
   const handleNo = () => {
-    // Do nothing - button shouldn't be clickable
+    // For touch/click devices, treat taps like a hover attempt
+    handleNoHover();
   };
 
   return (
@@ -142,8 +143,10 @@ function HomePage() {
           </button>
           <button 
             className={`btn btn-no ${noButtonBroken ? 'broken' : ''} ${hoverCount > 0 && hoverCount < 3 ? 'runaway' : ''}`}
-            onClick={handleNo}
+            onClick={handleNoHover}
             onMouseEnter={handleNoHover}
+            onPointerEnter={handleNoHover}
+            onTouchStart={handleNoHover}
             style={hoverCount > 0 && hoverCount < 3 ? buttonPosition : {}}
           >
             {noButtonBroken ? 'Enough! Not Happening!' : 'No'}
@@ -152,7 +155,7 @@ function HomePage() {
 
         {noButtonBroken && (
           <div className="rejection-message">
-            <p className="glitch">Fuck Off 😈</p>
+            <p className="glitch">No! Not! Never! 😈</p>
           </div>
         )}
       </div>
